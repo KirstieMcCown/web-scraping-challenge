@@ -45,9 +45,22 @@ def scrape():
 
     # Find the JPL Featured Space Image URL 
 
-    img_url = imageSoup.find("article", class_="carousel_item")["style"].replace('background-image: url(','').replace(');', '')[1:-1]
+    # Click the full image link
+    browser.click_link_by_id("full_image")
 
+    # Give the page time to load
+    time.sleep(3)
+
+    # Scrape page into Soup
+    html = browser.html
+    imagesoup = bs(html, "html.parser")
+
+    # Find the partial image URL
+    img_url = imagesoup.find("img", class_="fancybox-image")["src"]
+
+    # Create the full image URL
     featured_image_url = imageurl + img_url
+
 
 
     # Visit Mars Facts Website
@@ -88,6 +101,9 @@ def scrape():
     # Create an empty list to store each of the titles 
     titles = []
 
+    # Create an empty list to store each of the URLs 
+    URLs = []
+
     # Create an empty list to store each of the titles and URLs
     astrogeology_list = []
 
@@ -113,7 +129,7 @@ def scrape():
         html = browser.html
         USGSImgSoup = bs(html, "html.parser")
         image_url = USGSImgSoup.find_all("li")[0].a["href"]
-
+        URLs.append(image_url)
 
         # Create a dictionary of title and url
         astrogeology_dict = {"title":title, "image_url":image_url}
@@ -128,7 +144,8 @@ def scrape():
         "featured_image": featured_image_url,
         "html_table": html_table,
         "title": title,
-        "image_url":image_url
+        "image_url":image_url,
+        "hemispheres": astrogeology_list
     }
 
 

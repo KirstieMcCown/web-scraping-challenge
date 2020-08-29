@@ -12,14 +12,119 @@
 <body>
   <div class="container-fluid">
     <div class="jumbotron text-center">
-      <h1><strong>Mission to Mars</strong></h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data!</a></p>
+      <h1><strong>Mission to Mars</strong></h1><br>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button" onclick="visFunction()">Scrape New Data!</a></p>
     </div>
-    <h2>Latest Mars News</h2>
-    <h3>{{ collection.news_title }}</h3>
-    <p>{{ collection.news_p }}</p>
+    <h2><strong>Latest Mars News</strong></h2>
+    <h4><u>{{ data.news_title }}</u></h4>
+    <p>{{ data.news_p }}</p>
   </div>
   </div>
+
+<!-- First row with featured mars image and facts table -->
+<section>
+  <div class="row">
+    <div class="col-md-8">
+      <h2><strong>Featured Mars Image</strong></h2>
+      <a href = "{{ data.featured_image }}">
+        <img src = "{{ data.featured_image }}" class="img-responsive" alt = "Mars Featured Image">
+      </a>
+      <br>
+    </div>
+
+    <div class="col-md-4">
+      <h4><strong>Mars Facts</strong></h4>
+      {{ data.html_table | safe }}
+    <br><br>
+    </div>
+    
+  </div>
+</section>
+
+
+<!-- Second row with hemisphers -->
+<section>
+  <div class="row justify-content-md-center">
+    <div class="col-lg-12">
+      <h2 class="text-center"><strong>Mars Hemispheres</strong></h2>
+
+      {% for hemisphere in mars.mars_dict %}
+
+      <div class = "col-md-6">
+
+          <div class = "thumbnail">
+
+              <img src = "{{hemisphere.img_url}}">
+
+                  <h3>{{hemisphere.title}}</h3>
+
+              </div>
+
+          </div>
+
+  {% endfor %}
+
+      </div>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+
+  
 </body>
 
 </html>
+
+
+
+ 
+
+<!-- Row 3 -->
+  
+<!-- <div class="row">
+  <div class="col-lg-6">
+    <a href="maxtemp.html">
+      <h5>{{ data.astrogeology_list[0].title }}</h5>
+      <img id ="image" src ="{{ data.astrogeology_list[0].image_url }}">
+    </a>
+  </div>
+  <div class="col-lg-6">
+    <a href="maxtemp.html">
+      <h5>{{ data.title }}</h5>
+      <img id ="image" src ="{{ data.image_url }}">
+    </a>
+  </div>
+</div> -->
+
+
+
+<!-- Row 3 -->
+  
+<!-- <div class="row">
+  <div class="col-lg-6">
+    <a href="maxtemp.html">
+      <h5>{{ data.title }}</h5>
+      <img id ="image" src ="{{ data.image_url }}">
+    </a>
+  </div>
+  <div class="col-lg-6"> 
+    <a href="maxtemp.html">
+      <h5>{{ data.title }}</h5>
+      <img id ="image" src ="{{ data.image_url }}">
+    </a>
+  </div>
+</div> -->
