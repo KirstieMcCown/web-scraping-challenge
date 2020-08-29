@@ -56,10 +56,13 @@ def scrape():
     imagesoup = bs(html, "html.parser")
 
     # Find the partial image URL
+    url = "https://www.jpl.nasa.gov"
     img_url = imagesoup.find("img", class_="fancybox-image")["src"]
 
     # Create the full image URL
-    featured_image_url = imageurl + img_url
+    featured_image_url = url + img_url
+
+
 
 
 
@@ -138,6 +141,7 @@ def scrape():
 
 
     # Store data in a dictionary
+    
     mars_dict = {
         "news_title": news_title,
         "news_p": news_p,
